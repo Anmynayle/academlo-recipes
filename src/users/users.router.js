@@ -1,14 +1,14 @@
 const router = require('express').Router()
 const passport = require('passport')//?1 para rutas  protegidas
-
+const adminValidate = require('../middlewares/rol.middleware')
 const userServices = require('./users.services')
 
 //? rutas raiz
 
 // router.get('/', passport.authenticate('jwt',{session:false}),
 //             userServices.getAllUsers)//? 3con esto la ryta esta protegida
-          
-            
+
+
 router.get('/',userServices.getAllUsers)      
 
 require('../middlewares/auth.middleware')(passport)//? 2para rutas protegidas
@@ -42,7 +42,18 @@ router.route('/me')
 
 router.route('/:id')
     .get(userServices.getUserById)
-    .patch(userServices.patchUser)
-    .delete(userServices.deleteUser)
+
+    .patch(
+        passport.authenticate('jwt', {session: false}),
+        adminValidate,
+        userServices.patchUser
+    )
+    .delete(
+        passport.authenticate('jwt', {session: false}),
+        adminValidate,
+        userServices.deleteUser
+    )
+
+
 
 module.exports = router

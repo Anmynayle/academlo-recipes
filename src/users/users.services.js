@@ -1,4 +1,3 @@
-const { use } = require("passport");
 const { RowDescriptionMessage } = require("pg-protocol/dist/messages");
 const usersControllers = require("./users.controllers");
 
@@ -105,7 +104,7 @@ const deleteUser = (req, res) => {
 
     const getMyUser = (req,res)=>{
         const id = req.user.id
-        
+
         usersControllers.getUserById(id)
           .then(data =>{
             res.status(200).json(data)
@@ -118,43 +117,29 @@ const deleteUser = (req, res) => {
     const patchMyUser = (req,res)=>{
       const id = req.user.id;
       const { firstName, lastName, phone, gender, country } = req.body;
-    
+
       usersControllers.updateUser(id, { firstName, lastName, phone, gender, country })
         .then((data) => {
-            res.status(200).json({ message: `your user has been successfully edited!` });
+            res.status(200).json({ message: `User with ID: ${id}, edited succesfully!` });
         })
         .catch((err) => {
           res.status(400).json({ message: err.message });
         });
     };
-      
 
-      // const deleteMyUser = (req, res) => {
-      //   const id = req.user.id
-      //   usersControllers.deleteUser(id)
-      //     .then((response)=>{
-      //       res.status(204).json()
-      //     })
-      //     .catch(err=>{
-      //       res.status(400).json(err)
-      //     })
-      // }
+      const deleteMyUser = (req, res) => {
+        const id = req.user.id
+        usersControllers.deleteUser(id)
+          .then((response)=>{
+            res.status(204).json()
+          })
+          .catch(err=>{
+            res.status(400).json(err)
+          })
+      }
 
-          const deleteMyUser = (req, res)=>{
-            const id = req.user.id
-
-            usersControllers.updateUser(id,{status:'inactive'})
-              .then((data) => {
-                res.status(200).json({ message: `your user was  delete successfully edited!` });
-              })
-              .catch((err) => {
-                res.status(400).json({ message: err.message });
-          });
-     
-     
-          }
     //   };     
-    
+
 
 module.exports = {
     getAllUsers,
