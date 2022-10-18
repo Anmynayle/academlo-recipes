@@ -120,7 +120,7 @@ const deleteUser = (req, res) => {
     
       usersControllers.updateUser(id, { firstName, lastName, phone, gender, country })
         .then((data) => {
-            res.status(200).json({ message: `User with ID: ${id}, edited succesfully!` });
+            res.status(200).json({ message: `your user has been successfully edited!` });
         })
         .catch((err) => {
           res.status(400).json({ message: err.message });
