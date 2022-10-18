@@ -1,3 +1,4 @@
+const { use } = require("passport");
 const { RowDescriptionMessage } = require("pg-protocol/dist/messages");
 const usersControllers = require("./users.controllers");
 
@@ -127,17 +128,31 @@ const deleteUser = (req, res) => {
         });
     };
       
-      const deleteMyUser = (req, res) => {
-        const id = req.user.id
-        usersControllers.deleteUser(id)
-          .then((response)=>{
-            res.status(204).json()
-          })
-          .catch(err=>{
-            res.status(400).json(err)
-          })
-      }
 
+      // const deleteMyUser = (req, res) => {
+      //   const id = req.user.id
+      //   usersControllers.deleteUser(id)
+      //     .then((response)=>{
+      //       res.status(204).json()
+      //     })
+      //     .catch(err=>{
+      //       res.status(400).json(err)
+      //     })
+      // }
+
+          const deleteMyUser = (req, res)=>{
+            const id = req.user.id
+
+            usersControllers.updateUser(id,{status:'inactive'})
+              .then((data) => {
+                res.status(200).json({ message: `your user was  delete successfully edited!` });
+              })
+              .catch((err) => {
+                res.status(400).json({ message: err.message });
+          });
+     
+     
+          }
     //   };     
     
 
