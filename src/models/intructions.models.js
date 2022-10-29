@@ -1,31 +1,32 @@
-const { DataTypes} = require('sequelize')
+const { DataTypes } = require('sequelize')
 
 const db = require('../utils/database')
 const Recipes = require('./recipes.models')
 
-const Instructions = db.define('intructions',{
-    id:{
-        type:DataTypes.UUID,
+const Instructions = db.define('instructions', {
+    id: {
+        type: DataTypes.UUID,
         primaryKey: true,
         allowNull: false
     },
-    description:{
+    description: {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    step:{
+    step: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    recipeId:{
+    recipeId: {
         type: DataTypes.UUID,
         allowNull: false,
-        field:'recipe_id',
-        references:{
+        field: 'recipe_id',
+        references: {
             key: 'id',
             model: Recipes
         }
     }
 })
+
 
 module.exports = Instructions

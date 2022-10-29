@@ -6,13 +6,14 @@ const db = require('./utils/database')
 const {port} = require('./config');
 //* Routes
 const userRouter = require('./users/users.router')
-const authRouter = require('./auth/auth.router')
+const authRouter = require('./auth/auth.router');
+const initModels = require('./models/initModels');
 
 //? Initial Configs
 const app = express()
 
 app.use(express.json())
-
+initModels()
 db.authenticate()
     .then(() => {
         console.log('Database Authenticated')

@@ -14,8 +14,10 @@ const Types = db.define('types', {
         allowNull:false,
         unique: true
     }
-},{
-    timestamps: false
+}, {
+    //? Evita que sequelize cree la columna de createdAt y updatedAt
+    timestamps: false,
+    
 })
 
 module.exports = Types

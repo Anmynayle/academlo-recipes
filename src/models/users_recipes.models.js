@@ -1,37 +1,35 @@
-const { DataTypes} = require('sequelize')
+const {DataTypes} = require('sequelize')
 
 const db = require('../utils/database')
 const Users = require('./users.models')
 const Recipes = require('./recipes.models')
 
-const UsersRecipes = db.define('users_recipes',{
-
-    id:{
-        type:DataTypes.UUID,
+const UsersRecipes = db.define('users_recipes', {
+    id: {
+        type: DataTypes.UUID,
         primaryKey: true,
         allowNull: false
     },
-    
-    favorite:{
+    favorite: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
     },
-    userId:{
+    userId: {
         type: DataTypes.UUID,
         allowNull: false,
-        field:'user_id',
-        references:{
+        field: 'user_id',
+        references: {
             key: 'id',
             model: Users
         }
     },
-    recipeId:{
+    recipeId: {
         type: DataTypes.UUID,
         allowNull: false,
-        field:'recipes_id',
-        references:{
-            key:'id',
+        field: 'recipe_id',
+        references: {
+            key: 'id',
             model: Recipes
         }
     }
