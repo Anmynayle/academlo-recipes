@@ -40,9 +40,9 @@ router.route('/me')
         userServices.deleteMyUser
     )
 
+//? /api/v1/users/:id
 router.route('/:id')
     .get(userServices.getUserById)
-
     .patch(
         passport.authenticate('jwt', {session: false}),
         adminValidate,
@@ -53,6 +53,7 @@ router.route('/:id')
         adminValidate,
         userServices.deleteUser
     )
+
 
 
 

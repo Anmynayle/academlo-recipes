@@ -28,9 +28,11 @@ const getCategoryById = (req,res)=>{
     })
 }
 const postCategory = (req,res)=>{
-    const { name } = req.body
+    
+    const userId = req.user.id;
+    const name  = req.body
     if(name){
-    categoriesControllers.createCategories(name)
+    categoriesControllers.createCategories(name,userId)
         .then(data=>{
             res.status(201).json(data)
         })
@@ -49,8 +51,9 @@ const postCategory = (req,res)=>{
 }
 
 const deleteCategories = (req, res)=>{
+    const userId = req.user.id
     const id = req.params.id
-    categoriesControllers.deleteCategories(id)
+    categoriesControllers.deleteCategories(id,userId)
         .then(data=>{
             if(data){
                 res.status(204).json(data)

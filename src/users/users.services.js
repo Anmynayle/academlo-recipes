@@ -1,4 +1,4 @@
-const { RowDescriptionMessage } = require("pg-protocol/dist/messages");
+
 const usersControllers = require("./users.controllers");
 
 const getAllUsers = (req, res) => {
@@ -77,7 +77,6 @@ const patchUser = (req, res) => {
       res.status(400).json({ message: err.message });
     });
 };
-
 const deleteUser = (req, res) => {
   const id = req.params.id;
   usersControllers

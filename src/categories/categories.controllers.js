@@ -19,17 +19,19 @@ const getCategoriesById = async (id)=> {
     return data
 }
 
-const createCategories = async (name)=>{
-    const data = await Categories.create({
-        name
+const createCategories = async (data)=>{
+    const response = await Categories.create({
+        name: data.name,
+        userId: data.userId
     })
-    return data
+    return response
 }
 
 const deleteCategories = async (id)=>{
     const data = await Categories.destroy({
         where:{
             id
+           
         }
     })
     return data
