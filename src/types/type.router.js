@@ -12,7 +12,7 @@ router.route('/')
         adminValidate,
         typeServices.postType)
 
-route.route('./:id')
+router.route('./:id')
     .get(typeServices.getTypeById)
     .delete(passport.authenticate('jwt',{session:false}),
     adminValidate,
