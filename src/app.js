@@ -11,6 +11,7 @@ const authRouter = require('./auth/auth.router');
 const initModels = require('./models/initModels');
 const categoryRouter = require('./categories/categories.router')
 const typeRouter = require('./types/type.router')
+const recipeRouter = require('./recipes/recipes.router')
 
 
 //? Initial Configs
@@ -52,6 +53,7 @@ app.use('/api/v1/users', userRouter)
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/categories', categoryRouter)
 app.use('/api/v1/type', typeRouter)
+app.use('/api/v1/recipes', recipeRouter)
 
 app.listen(port, () => {
     console.log(`Server started at port ${port}`)
