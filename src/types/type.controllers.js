@@ -1,47 +1,40 @@
-const Type = require('../models/types.models')
+const Types = require('../models/types.models')
 
 
-//? Ver todos los typos
-//? Ver un typo en especifico
-//? Crear Type
-//? Eliminar type
 
-const getAllType = async () =>{
-    const data = await Type.findAll()
+const getAllTypes = async () => {
+    const data = await Types.findAll()
     return data
 }
 
-const getTypeById = async () =>{
-    const data = await Type.findOne({
-        where:{
-            id
-        }
-
-    })
-    return data
-}
-
-const createType = async (data)=>{
-    const response = await Type.create({
-        name:data.name,
-        userId: data.userId
-    })
-    return response
-}
-
-const deleteType = async (id) =>{
-    const data = await Type.destroy({
-        where:{
+const getTypeById = async (id) => {
+    const data = await Types.findOne({
+        where: {
             id
         }
     })
     return data
 }
 
-module.exports={
-    getAllType,
+const createType = async (name) => {
+    const data = await Types.create({
+        name
+    })
+    return data
+}
+
+const deleteType = async (id) => {
+    const data = await Types.destroy({
+        where: {
+            id
+        }
+    })
+    return data
+}
+
+module.exports = {
+    getAllTypes,
     getTypeById,
     createType,
     deleteType
 }
-
