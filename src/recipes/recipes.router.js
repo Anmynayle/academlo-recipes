@@ -16,12 +16,11 @@ router.route('/')
         recipesServices.createRecipes
     )
 
-router.route('/:recipe_id')
-    .get(recipesServices.getAllRecipes)
+    router.route('/:recipe_id')
+    .get(recipesServices.getRecipeById)
     .patch(
-        passport.authenticate('jwt',{session:false}),
+        passport.authenticate('jwt', {session: false}),
         recipesServices.patchRecipe
-
     )
     .delete(
         passport.authenticate('jwt',{session:false}),
