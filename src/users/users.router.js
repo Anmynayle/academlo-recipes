@@ -2,6 +2,7 @@ const router = require('express').Router()
 const passport = require('passport')//?1 para rutas  protegidas
 const adminValidate = require('../middlewares/rol.middleware')
 const userServices = require('./users.services')
+const {getUserRecipes} = require('../recipes/recipes.services')
 
 //? rutas raiz
 
@@ -39,6 +40,13 @@ router.route('/me')
         passport.authenticate('jwt', {session:false}),
         userServices.deleteMyUser
     )
+
+//? rutas para obtener las recetas
+    router.get('/me/my_recipes', 
+        passport.authenticate('jwt', {session: false}),
+        getUserRecipes
+)
+
 
 //? /api/v1/users/:id
 router.route('/:id')

@@ -86,10 +86,23 @@ const deleteRecipe = (req, res)=>{
         })
 }
 
+
+const getUserRecipes = (req, res) =>{
+    const userId= req.user.id
+    recipesControllers.getMyRecipes(userId)
+        .then(data=>{
+            res.status(200).json(data)
+        })
+        .catch(err=>{
+            res.status(400).json({message: err.message})
+        })
+}
+
 module.exports = {
     getAllRecipes,
     getRecipeById,
     createRecipes,
     patchRecipe, 
-    deleteRecipe
+    deleteRecipe,
+    getUserRecipes
 }
